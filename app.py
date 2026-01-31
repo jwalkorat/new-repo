@@ -222,6 +222,9 @@ def analytics():
     print(data_dict)
     return render_template("analytics.html", data=data_dict)
 
+@app.route("/hey")
+def greetings():
+    return "<h1>Hello</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)
