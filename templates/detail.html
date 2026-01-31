@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Student Detail{% endblock %}
+
+{% block content %}
+
+{% if result %}
+
+    <h1 style="text-align:center;">Student Details</h1>
+    <p style="text-align:center;">Complete academic and attendance information</p><br>
+
+    <h1>Student Information</h1>
+    <ul>
+        <li><h2>Name: {{ result.name }}</h2></li>
+        <li><h2>Roll Number: {{ result.roll_no }}</h2></li>
+        <li><h2>Gender: {{ result.gender }}</h2></li>
+        <li><h2>Attendance: {{ result.attendance }} %</h2></li>
+    </ul><br>
+
+    <h1>Subject Scores</h1>
+    <ul>
+        <li><h2>Math Score: {{ result.math_score }}</h2></li>
+        <li><h2>Reading Score: {{ result.reading_score }}</h2></li>
+        <li><h2>Writing Score: {{ result.writing_score }}</h2></li>
+    </ul><br>
+
+    <h1>Performance Summary</h1>
+    <ul>
+        <li><h2>Total Score: {{ result.total_score }}</h2></li>
+        <li><h2>Average Score: {{ result.avg_score }}</h2></li>
+        <li><h2>Performance Label: {{ result.performance_label }}</h2></li>
+    </ul><br>
+
+    <ul>
+        <li><h3><a href="{{ url_for('edit', id=result.id) }}">Edit Student</a></h3></li>
+        <li><h3><a href="{{ url_for('students') }}">Back to Students</a></h3></li>
+    </ul>
+
+
+{% else %}
+
+    <h1 style="text-align:center;">Student Not Found</h1>
+    <p style="text-align:center;">The student you are trying to view does not exist or may have been deleted.</p>
+
+{% endif %}
+
+{% endblock %}

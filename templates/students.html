@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Students{% endblock %}
+
+{% block styles %}
+form {
+  display: inline; /* Makes the form stay on the same line as text */
+  margin: 0;      /* Removes default browser spacing around forms */
+  padding: 0;
+}
+.delete-link {
+background: none;
+border: none;
+padding: 0;
+color: blue;
+cursor: pointer;
+text-decoration: underline;
+font: inherit;
+}
+{% endblock %}
+
+{% block content %}
+
+<h1 style="text-align:center;">Students List</h1>
+<br>
+
+{% if results %}
+
+<table border="1" cellpadding="7">
+    <tr>
+        <th align="center">Roll Number</th>
+        <th align="center">Name</th>
+        <th align="center">Gender</th>
+        <th align="center">Average Score</th>
+        <th align="center">Performance Label</th>
+        <th align="center">Actions</th>
+    </tr>
+    {% for i in results %}
+        <tr>
+            <th align="center">{{ i.roll_no }}</th>
+            <td align="center">{{ i.name }}</td>
+            <td align="center">{{ i.gender }}</td>
+            <td align="center">{{ i.avg_score }}</td>
+            <td align="center">{{ i.performance_label }}</td>
+            <td align="center"><a href="{{ url_for('detail', id=i.id) }}">View</a> | <a href="{{ url_for('edit', id=i.id) }}">Edit</a> | <form method="post" action="{{ url_for('delete', id=i.id) }}">{{ form.csrf_token }}{{ form.submit(class="delete-link") }}</form></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+    <h3>No students found. Please add a student.</h3>
+{% endif %}
+
+<br>
+<ul>
+    <li><h4><a href="{{ url_for('home') }}">Home</a></h4></li>
+    <li><h4><a href="{{ url_for('add') }}">Add Student</a></h4></li>
+    <li><h4><a href="{{ url_for('analytics') }}">Analytics</a></h4></li>
+</ul>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Add Student{% endblock %}
+
+{% block content %}
+
+<h1>Add Student</h1>
+
+<form action="{{ url_for('add') }}" method="post" novalidate>
+    {{ form.csrf_token }}
+    <p>
+        {{ form.name.label }} <br> {{ form.name }}
+        {% for err in form.name.errors %}
+            <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.roll_number.label }} <br> {{ form.roll_number }}
+        {% for err in form.roll_number.errors %}
+            <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.gender.label }} <br> {{ form.gender }}
+        {% for err in form.gender.errors %}
+            <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.math_score.label }} <br> {{ form.math_score }}
+        {% for err in form.math_score.errors %}
+            <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.reading_score.label }} <br> {{ form.reading_score }}
+        {% for err in form.reading_score.errors %}
+            <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.writing_score.label }} <br> {{ form.writing_score }}
+        {% for err in form.writing_score.errors %}
+            <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.attendance.label }} <br> {{ form.attendance }}
+        {% for err in form.attendance.errors %}
+            <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </p>
+    {{ form.submit }}
+
+</form>
+
+{% endblock %}

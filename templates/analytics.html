@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+
+<h1 style="text-align:center;">Student Performance Analytics</h1>
+<p style="text-align:center;">System-wide academic insights based on student records</p><br>
+
+{% if data['total_students'] %}
+
+<h3>Total Students: {{ data['total_students'] }}</h3>
+<h3>Overall Average Score: {{ data['main_marks_avg'] }}</h3><br>
+
+<table border="1" cellpadding="7">
+    <tr>
+        <th align="center">Performance Level</th>
+        <th align="center">Number of Students</th>
+    </tr>
+    <tr>
+        <td align="center">Excellent</td>
+        <td align="center">{{ data['excellent'] }}</td>
+    </tr>
+    <tr>
+        <td align="center">Good</td>
+        <td align="center">{{ data['good'] }}</td>
+    </tr>
+    <tr>
+        <td align="center">Needs Improvement</td>
+        <td align="center">{{ data['needs_improvement'] }}</td>
+    </tr>
+</table><br>
+
+<h3>Average Attendance: {{ data['avg_attendance'] }} %</h3>
+<table border="1" cellpadding="7">
+    <tr>
+        <th align="center">Attendance Group</th>
+        <th align="center">Student Count</th>
+    </tr>
+    <tr>
+        <td align="center">Below 75%</td>
+        <td align="center">{{ data['below_75'] }}</td>
+    </tr>
+    <tr>
+        <td align="center">75% and above</td>
+        <td align="center">{{ data['above_and_75'] }}</td>
+    </tr>
+</table><br>
+
+<h3>Top Performers</h3>
+<table border="1" cellpadding="7">
+    <tr>
+        <th align="center">Name</th>
+        <th align="center">Roll No</th>
+        <th align="center">Avg Score</th>
+        <th align="center">Performance Label</th>
+    </tr>
+    {% for i in data['top_students'] %}
+        <tr>
+            <td>{{ i.name }}</td>
+            <td>{{ i.roll_no }}</td>
+            <td>{{ i.avg_score }}</td>
+            <td>{{ i.performance_label }}</td>
+        </tr>
+    {% endfor %}
+</table><br>
+
+<h3>Students Needing Attention</h3>
+<table border="1" cellpadding="7">
+    <tr>
+        <th align="center">Name</th>
+        <th align="center">Roll No</th>
+        <th align="center">Avg Score</th>
+        <th align="center">Attendance</th>
+    </tr>
+    {% for i in data['weak_students'] %}
+    <tr>
+            <td>{{ i.name }}</td>
+            <td>{{ i.roll_no }}</td>
+            <td>{{ i.avg_score }}</td>
+            <td>{{ i.attendance }}</td>
+        </tr>
+    {% endfor %}
+</table><br>
+
+{% else %}
+
+<h2>No student data available.</h2>
+<h2>Please add students to view analytics.</h2>
+
+{% endif %}
+
+{% endblock %}
